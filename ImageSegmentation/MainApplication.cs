@@ -109,7 +109,7 @@ namespace ImageTemplate
 
             RGBPixel[,] gaussImage = ImageOperations.GaussianFilter1D(_originalImage, maskSize, sigma);
             int[] segments = PixelGraphSegmentator.Segment(isGauss.Checked ? gaussImage : _originalImage, k);
-            RGBPixel[,] _solidColorSegmentedImage = SolidColorImage(segments, imageWidth, imageHeight);
+            _solidColorSegmentedImage = SolidColorImage(segments, imageWidth, imageHeight);
 
             for (int i = 0; i < _renderPanels.Length; i++)
             {
@@ -180,7 +180,6 @@ namespace ImageTemplate
             {
                 for (int x = 0; x < width; x++)
                 {
-
                     switch (channel)
                     {
                         case ColorChannel.Red:
@@ -225,6 +224,41 @@ namespace ImageTemplate
                 outputFile.WriteLine(pixelsPerSegment.Count);
                 foreach (var seg in sortedSegments)
                     outputFile.WriteLine(seg.Value);
+            }
+        }
+
+        private void selectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_originalImage == null || _solidColorSegmentedImage == null) return;
+
+            double sigma = double.Parse(txtGaussSigma.Text);
+            int maskSize = (int) nudMaskSize.Value;
+            float blend = (float)(numericBlend.Value / numericBlend.Maximum);
+
+            for (int i = 0; i < _renderPanels.Length; i++)
+            {
+                RGBPixel[,] renderedImage = null;
+                ViewMode mode = (ViewMode) _comboViews[i].SelectedIndex;
+                ColorChannel channel = _viewModeChannel[mode];
+
+                switch (mode)
+                {
+                    case ViewMode.Orignal_Image:
+                        renderedImage = renderedImage = BlendImage(_originalImage, _originalImage, 1.0f, channel);
+                        break;
+                    case ViewMode.Gauss_Filter:
+                        RGBPixel[,] gaussImage = ImageOperations.GaussianFilter1D(_originalImage, maskSize, sigma);
+                        renderedImage = gaussImage;
+                        break;
+                    case ViewMode.Solid_Color:
+                        renderedImage = renderedImage = BlendImage(_solidColorSegmentedImage, _solidColorSegmentedImage, 1.0f, channel);
+                        break;
+                    case ViewMode.Blend_Image:
+                        renderedImage = BlendImage(_originalImage, _solidColorSegmentedImage, blend, channel);
+                        break;
+                }
+
+                ImageOperations.DisplayImage(renderedImage, _renderPanels[i]);
             }
         }
     }
