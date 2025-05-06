@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace ImageTemplate
 {
@@ -24,11 +25,12 @@ namespace ImageTemplate
 
         public static int[] Segment(RGBPixel[,] image, float k)
         {
-            int[] red = SegmentChannel(image, ColorChannel.Red, k);
-            int[] green = SegmentChannel(image, ColorChannel.Green, k);
-            int[] blue = SegmentChannel(image, ColorChannel.Blue, k);
-
-            return MergeSegmentChannels(red, green, blue);
+            Task<int[]> redTask = Task <int[]>.Factory.StartNew(() => { return SegmentChannel(image, ColorChannel.Red, k); });
+            Task<int[]> greenTask = Task<int[]>.Factory.StartNew(() => { return SegmentChannel(image, ColorChannel.Green, k); });
+            Task<int[]> blueTask = Task<int[]>.Factory.StartNew(() => { return SegmentChannel(image, ColorChannel.Blue, k); });
+            Task.WaitAll(redTask, greenTask, blueTask);
+            
+            return MergeSegmentChannels(redTask.Result, greenTask.Result, blueTask.Result);
         }
 
         public static int[] SegmentChannel(RGBPixel[,] image, ColorChannel channel, float k)
