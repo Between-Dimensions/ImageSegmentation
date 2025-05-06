@@ -120,13 +120,13 @@ namespace ImageTemplate
                 switch (mode)
                 {
                     case ViewMode.Orignal_Image:
-                        renderedImage = renderedImage = BlendImage(_originalImage, _originalImage, 1.0f, channel);
+                        renderedImage = _originalImage;
                         break;
                     case ViewMode.Gauss_Filter:
                         renderedImage = gaussImage;
                         break;
                     case ViewMode.Solid_Color:
-                        renderedImage = renderedImage = BlendImage(_solidColorSegmentedImage, _solidColorSegmentedImage, 1.0f, channel);
+                        renderedImage = _solidColorSegmentedImage;
                         break;
                     case ViewMode.Blend_Image:
                         renderedImage = BlendImage(_originalImage, _solidColorSegmentedImage, blend, channel);
@@ -244,14 +244,14 @@ namespace ImageTemplate
                 switch (mode)
                 {
                     case ViewMode.Orignal_Image:
-                        renderedImage = renderedImage = BlendImage(_originalImage, _originalImage, 1.0f, channel);
+                        renderedImage = _originalImage;
                         break;
                     case ViewMode.Gauss_Filter:
                         RGBPixel[,] gaussImage = ImageOperations.GaussianFilter1D(_originalImage, maskSize, sigma);
                         renderedImage = gaussImage;
                         break;
                     case ViewMode.Solid_Color:
-                        renderedImage = renderedImage = BlendImage(_solidColorSegmentedImage, _solidColorSegmentedImage, 1.0f, channel);
+                        renderedImage = _solidColorSegmentedImage;
                         break;
                     case ViewMode.Blend_Image:
                         renderedImage = BlendImage(_originalImage, _solidColorSegmentedImage, blend, channel);
