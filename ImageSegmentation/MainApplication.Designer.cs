@@ -81,6 +81,7 @@
             this.cboxView2.Name = "cboxView2";
             this.cboxView2.Size = new System.Drawing.Size(576, 21);
             this.cboxView2.TabIndex = 47;
+            this.cboxView2.SelectionChangeCommitted += new System.EventHandler(this.selectedIndexChanged);
             // 
             // label7
             // 
@@ -255,9 +256,6 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.Location = new System.Drawing.Point(3, 3);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(617, 514);
@@ -267,9 +265,6 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(631, 514);
@@ -298,6 +293,7 @@
             this.cboxView1.Name = "cboxView1";
             this.cboxView1.Size = new System.Drawing.Size(592, 21);
             this.cboxView1.TabIndex = 48;
+            this.cboxView1.SelectionChangeCommitted += new System.EventHandler(this.selectedIndexChanged);
             // 
             // label8
             // 
