@@ -69,15 +69,28 @@ namespace ImageTemplate
 
         private static int[] MergeSegmentChannels(int[] red, int[] green, int[] blue)
         {
-            Debug.Assert((red.Length == green.Length) && (green.Length == blue.Length));
+            Debug.Assert(red.Length == green.Length && green.Length == blue.Length);
 
             int pixelCount = red.Length;
-            int[] segments = new int[pixelCount];
+            int[] segmentMap = new int[pixelCount];
+            var uniqueSegments = new Dictionary<(int, int, int), int>();
+            int currentId = 0;
 
             for (int i = 0; i < pixelCount; i++)
-                segments[i] = (red[i] << 16) | (green[i] << 8) | blue[i];
+            {
+                var key = (red[i], green[i], blue[i]);
 
-            return segments;
+                if (!uniqueSegments.TryGetValue(key, out int id))
+                {
+                    id = currentId;
+                    uniqueSegments[key] = currentId;
+                    currentId++;
+                }
+
+                segmentMap[i] = id;
+            }
+
+            return segmentMap;
         }
 
         private static List<Edge> ConstructEdges(RGBPixel[,] image, ColorChannel channel)
