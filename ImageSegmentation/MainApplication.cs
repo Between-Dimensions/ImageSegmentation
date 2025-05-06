@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ImageTemplate
@@ -133,6 +135,8 @@ namespace ImageTemplate
 
                 ImageOperations.DisplayImage(renderedImage, _renderPanels[i]);
             }
+
+            WriteSegements(segments);
         }
 
         private RGBPixel[,] SolidColorImage(int[] segments, int width, int height)
@@ -203,6 +207,25 @@ namespace ImageTemplate
         public static float Lerp(float a, float b, float t)
         {
             return a + (b - a) * t;
+        }
+
+        public static void WriteSegements(int[] segments)
+        {
+            Dictionary<int, int> pixelsPerSegment = new Dictionary<int, int>();
+
+            for (int i = 0; i < segments.Length; i++)
+                pixelsPerSegment[segments[i]] = 0;
+
+            for (int i = 0; i < segments.Length; i++)
+                pixelsPerSegment[segments[i]]++;
+
+            var sortedSegments = pixelsPerSegment.OrderByDescending(x => x.Value);
+            using (StreamWriter outputFile = new StreamWriter("output.txt"))
+            {
+                outputFile.WriteLine(pixelsPerSegment.Count);
+                foreach (var seg in sortedSegments)
+                    outputFile.WriteLine(seg.Value);
+            }
         }
     }
 }
