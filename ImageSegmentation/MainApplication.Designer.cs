@@ -113,7 +113,7 @@
             this.tboxK.Name = "tboxK";
             this.tboxK.Size = new System.Drawing.Size(148, 23);
             this.tboxK.TabIndex = 44;
-            this.tboxK.Text = "0.8";
+            this.tboxK.Text = "1";
             // 
             // btnApply
             // 
