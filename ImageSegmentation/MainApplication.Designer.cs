@@ -55,6 +55,7 @@
             this.numericBlend = new System.Windows.Forms.NumericUpDown();
             this.tboxElapsedTime = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.btnMergeRegions = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaskSize)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -264,6 +265,7 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseClick);
             // 
             // pictureBox1
             // 
@@ -273,6 +275,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseClick);
             // 
             // panel1
             // 
@@ -309,6 +312,7 @@
             // 
             // isGauss
             // 
+            this.isGauss.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.isGauss.AutoSize = true;
             this.isGauss.Location = new System.Drawing.Point(932, 578);
             this.isGauss.Name = "isGauss";
@@ -355,30 +359,43 @@
             // 
             // tboxElapsedTime
             // 
-            this.tboxElapsedTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tboxElapsedTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tboxElapsedTime.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxElapsedTime.Location = new System.Drawing.Point(1216, 570);
+            this.tboxElapsedTime.Location = new System.Drawing.Point(1181, 570);
             this.tboxElapsedTime.Name = "tboxElapsedTime";
             this.tboxElapsedTime.ReadOnly = true;
-            this.tboxElapsedTime.Size = new System.Drawing.Size(86, 23);
+            this.tboxElapsedTime.Size = new System.Drawing.Size(121, 23);
             this.tboxElapsedTime.TabIndex = 56;
             // 
             // label11
             // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(1213, 596);
+            this.label11.Location = new System.Drawing.Point(1178, 597);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(89, 16);
+            this.label11.Size = new System.Drawing.Size(124, 16);
             this.label11.TabIndex = 57;
-            this.label11.Text = "Elapsed Time";
+            this.label11.Text = "Elapsed Time (MS)";
+            // 
+            // btnMergeRegions
+            // 
+            this.btnMergeRegions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMergeRegions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMergeRegions.Location = new System.Drawing.Point(973, 569);
+            this.btnMergeRegions.Name = "btnMergeRegions";
+            this.btnMergeRegions.Size = new System.Drawing.Size(194, 23);
+            this.btnMergeRegions.TabIndex = 58;
+            this.btnMergeRegions.Text = "Merge Segments";
+            this.btnMergeRegions.UseVisualStyleBackColor = true;
+            this.btnMergeRegions.Click += new System.EventHandler(this.btnMergeRegions_Click);
             // 
             // MainApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1314, 681);
+            this.Controls.Add(this.btnMergeRegions);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.tboxElapsedTime);
             this.Controls.Add(this.numericBlend);
@@ -449,5 +466,6 @@
         private System.Windows.Forms.NumericUpDown numericBlend;
         private System.Windows.Forms.TextBox tboxElapsedTime;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnMergeRegions;
     }
 }
