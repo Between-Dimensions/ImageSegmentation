@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ImageTemplate
 {
-    public partial class MainApplication: Form
+    public partial class MainApplication : Form
     {
         private enum ViewMode
         {
@@ -36,6 +36,10 @@ namespace ImageTemplate
 
         private RGBPixel[,] _originalImage;
         private RGBPixel[,] _solidColorSegmentedImage;
+
+        private int[] _currentSegments;
+        private int _imageWidth, _imageHeight;
+        private HashSet<int> _selectedSegments = new HashSet<int>();
 
         private ComboBox[] _comboViews = new ComboBox[2];
         private PictureBox[] _renderPanels = new PictureBox[2];
@@ -105,8 +109,8 @@ namespace ImageTemplate
             float k = float.Parse(tboxK.Text);
             float blend = (float)(numericBlend.Value / numericBlend.Maximum);
 
-            int imageWidth = ImageOperations.GetWidth(_originalImage);
-            int imageHeight = ImageOperations.GetHeight(_originalImage);
+            _imageWidth = ImageOperations.GetWidth(_originalImage);
+            _imageHeight = ImageOperations.GetHeight(_originalImage);
 
             RGBPixel[,] gaussImage = ImageOperations.GaussianFilter1D(_originalImage, maskSize, sigma);
 
@@ -114,8 +118,9 @@ namespace ImageTemplate
             int[] segments = PixelGraphSegmentator.Segment(isGauss.Checked ? gaussImage : _originalImage, k);
             timer.Stop();
             tboxElapsedTime.Text = timer.ElapsedMilliseconds.ToString();
-
-            _solidColorSegmentedImage = SolidColorImage(segments, imageWidth, imageHeight);
+            _currentSegments = segments;
+            _solidColorSegmentedImage = SolidColorImage(segments, _imageWidth, _imageHeight);
+            _selectedSegments.Clear();
 
             for (int i = 0; i < _renderPanels.Length; i++)
             {
@@ -192,15 +197,15 @@ namespace ImageTemplate
                             outImage[y, x].red = (byte)Lerp(a[y, x].red, b[y, x].red, alpha);
                             break;
                         case ColorChannel.Green:
-                            outImage[y, x].green = (byte) Lerp(a[y, x].green, b[y, x].green, alpha);
+                            outImage[y, x].green = (byte)Lerp(a[y, x].green, b[y, x].green, alpha);
                             break;
                         case ColorChannel.Blue:
                             outImage[y, x].blue = (byte)Lerp(a[y, x].blue, b[y, x].blue, alpha);
                             break;
                         case ColorChannel.All:
-                            outImage[y, x].red = (byte) Lerp(a[y, x].red, b[y, x].red, alpha);
-                            outImage[y, x].green = (byte) Lerp(a[y, x].green, b[y, x].green, alpha);
-                            outImage[y, x].blue = (byte) Lerp(a[y, x].blue, b[y, x].blue, alpha);
+                            outImage[y, x].red = (byte)Lerp(a[y, x].red, b[y, x].red, alpha);
+                            outImage[y, x].green = (byte)Lerp(a[y, x].green, b[y, x].green, alpha);
+                            outImage[y, x].blue = (byte)Lerp(a[y, x].blue, b[y, x].blue, alpha);
                             break;
                     }
                 }
@@ -238,13 +243,13 @@ namespace ImageTemplate
             if (_originalImage == null || _solidColorSegmentedImage == null) return;
 
             double sigma = double.Parse(txtGaussSigma.Text);
-            int maskSize = (int) nudMaskSize.Value;
+            int maskSize = (int)nudMaskSize.Value;
             float blend = (float)(numericBlend.Value / numericBlend.Maximum);
 
             for (int i = 0; i < _renderPanels.Length; i++)
             {
                 RGBPixel[,] renderedImage = null;
-                ViewMode mode = (ViewMode) _comboViews[i].SelectedIndex;
+                ViewMode mode = (ViewMode)_comboViews[i].SelectedIndex;
                 ColorChannel channel = _viewModeChannel[mode];
 
                 switch (mode)
@@ -266,6 +271,71 @@ namespace ImageTemplate
 
                 ImageOperations.DisplayImage(renderedImage, _renderPanels[i]);
             }
+        }
+
+        private void btnMergeRegions_Click(object sender, EventArgs e)
+        {
+            if (_selectedSegments.Count < 2 || _currentSegments == null) return;
+
+            int mergeLabel = _selectedSegments.Min();
+            for (int i = 0; i < _currentSegments.Length; i++)
+            {
+                if (_selectedSegments.Contains(_currentSegments[i]))
+                    _currentSegments[i] = mergeLabel;
+            }
+            
+            _solidColorSegmentedImage = SolidColorImage(_currentSegments, _imageWidth, _imageHeight);
+            _selectedSegments.Clear();
+            HighlightSelectedRegions();
+        }
+
+        private void pictureBox2_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (_currentSegments == null || _imageWidth == 0 || _imageHeight == 0) return;
+            var pb = (PictureBox)sender;
+            if (pb.Image == null) return;
+            int imgX = e.X, imgY = e.Y;
+
+            if (imgX < 0 || imgX >= _imageWidth || imgY < 0 || imgY >= _imageHeight) return;
+
+            int idx = imgY * _imageWidth + imgX;
+            if (idx < 0 || idx >= _currentSegments.Length) return;
+            int segLabel = _currentSegments[idx];
+
+            if (_selectedSegments.Contains(segLabel))
+                _selectedSegments.Remove(segLabel);
+            else
+                _selectedSegments.Add(segLabel);
+
+            HighlightSelectedRegions();
+        }
+
+        private void HighlightSelectedRegions()
+        {
+            if (_solidColorSegmentedImage == null || _currentSegments == null) return;
+
+            //RGBPixel[,] displayImage = new RGBPixel[_imageHeight, _imageWidth];
+
+            //for (int y = 0; y < _imageHeight; y++)
+            //    for (int x = 0; x < _imageWidth; x++)
+            //        displayImage[y, x] = _solidColorSegmentedImage[y, x];
+
+            RGBPixel[,] displayImage = (RGBPixel[,])_solidColorSegmentedImage.Clone();
+
+            for (int y = 0; y < _imageHeight; y++)
+            {
+                for (int x = 0; x < _imageWidth; x++)
+                {
+                    int idx = y * _imageWidth + x;
+                    if (_selectedSegments.Contains(_currentSegments[idx]))
+                    {
+                        displayImage[y, x].red = 255;
+                        displayImage[y, x].green = 255;
+                        displayImage[y, x].blue = 0;
+                    }
+                }
+            }
+            ImageOperations.DisplayImage(displayImage, pictureBox2);
         }
     }
 }
