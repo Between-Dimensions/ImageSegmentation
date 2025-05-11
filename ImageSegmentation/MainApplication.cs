@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -108,7 +109,12 @@ namespace ImageTemplate
             int imageHeight = ImageOperations.GetHeight(_originalImage);
 
             RGBPixel[,] gaussImage = ImageOperations.GaussianFilter1D(_originalImage, maskSize, sigma);
+
+            Stopwatch timer = Stopwatch.StartNew();
             int[] segments = PixelGraphSegmentator.Segment(isGauss.Checked ? gaussImage : _originalImage, k);
+            timer.Stop();
+            tboxElapsedTime.Text = timer.ElapsedMilliseconds.ToString();
+
             _solidColorSegmentedImage = SolidColorImage(segments, imageWidth, imageHeight);
 
             for (int i = 0; i < _renderPanels.Length; i++)
