@@ -102,7 +102,7 @@ namespace ImageTemplate
         {
             double sigma = double.Parse(txtGaussSigma.Text);
             int maskSize = (int)nudMaskSize.Value;
-            float k = float.Parse(tboxK.Text);
+            int k = int.Parse(tboxK.Text);
             float blend = (float)(numericBlend.Value / numericBlend.Maximum);
 
             int imageWidth = ImageOperations.GetWidth(_originalImage);

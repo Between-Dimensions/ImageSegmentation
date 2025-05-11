@@ -13,9 +13,9 @@ namespace ImageTemplate
         {
             public int v;
             public int w;
-            public int weight;
+            public byte weight;
 
-            public Edge(int v, int w, int weight)
+            public Edge(int v, int w, byte weight)
             {
                 this.v = v;
                 this.w = w;
@@ -34,7 +34,7 @@ namespace ImageTemplate
             ( 1, -1)  // Bottom-Right
         };
 
-        public static int[] Segment(RGBPixel[,] image, float k)
+        public static int[] Segment(RGBPixel[,] image, int k)
         {
             Task<int[]> redTask = Task.Run(() => SegmentChannel(image, ColorChannel.Red, k));
             Task<int[]> greenTask = Task.Run(() => SegmentChannel(image, ColorChannel.Green, k) );
@@ -46,16 +46,21 @@ namespace ImageTemplate
             return MergeSegmentChannels(width, height, redTask.Result, greenTask.Result, blueTask.Result);
         }
 
-        public static int[] SegmentChannel(RGBPixel[,] image, ColorChannel channel, float k)
+        public static int[] SegmentChannel(RGBPixel[,] image, ColorChannel channel, int k)
         {
             // Kruskal’s minimum spanning tree (MST) algorithm implementation using UnionFind
 
             int pixelCount = GetPixelCount(image);
-            UnionFind components = new UnionFind(pixelCount);
-            int[] segmentMap = new int[pixelCount];
+            int[] size = new int[pixelCount];
+            // We only care abount the smallest connectivity edge weight and not the whole MST.
+            int[] internalDiff = new int[pixelCount];
 
+            UnionFind components = new UnionFind(pixelCount);
             List<Edge> edges = ConstructEdges(image, channel);
             edges.Sort((a, b) => a.weight.CompareTo(b.weight));
+
+            for (int i = 0; i < pixelCount; i++)
+                size[i] = 1;
 
             foreach (Edge e in edges)
             {
@@ -64,22 +69,29 @@ namespace ImageTemplate
 
                 if (c1 != c2)
                 {
-                    float c1InternalDiff = components.InternalDiff(c1);
-                    float c2InternalDiff = components.InternalDiff(c2);
-                    float minInteralDiff = Math.Min(c1InternalDiff + k / components.Size(c1),
-                                                    c2InternalDiff + k / components.Size(c2));
+                    int c1InternalDiff = internalDiff[c1];
+                    int c2InternalDiff = internalDiff[c2];
+                    float minInteralDiff = Math.Min(c1InternalDiff + (float) k / size[c1],
+                                                    c2InternalDiff + (float) k / size[c2]);
 
                     // Edge `e` is the minimum weight edge connecting the two components
                     // i.e. `e.weight` is Dif(C1, C2)
                     if (e.weight <= minInteralDiff)
-                        components.Union(c1, c2, e.weight);
+                    {
+                        components.Union(c1, c2);
+
+                        int newInternalDiff = Math.Max(e.weight, Math.Max(c1InternalDiff, c2InternalDiff));
+                        internalDiff[c1] = newInternalDiff;
+                        internalDiff[c2] = newInternalDiff;
+
+                        int newSize = size[c1] + size[c2];
+                        size[c1] = newSize;
+                        size[c2] = newSize;
+                    }
                 }
             }
 
-            for (int i = 0; i < pixelCount; i++)
-                segmentMap[i] = components.Find(i);
-
-            return segmentMap;
+            return components.FlattenParent();
         }
 
         private static int[] MergeSegmentChannels(int width, int height, int[] red, int[] green, int[] blue)
@@ -87,7 +99,6 @@ namespace ImageTemplate
             Debug.Assert((red.Length == width * height) && (red.Length == green.Length) && (green.Length == blue.Length));
 
             int pixelCount = red.Length;
-            int[] segmentMap = new int[pixelCount];
             UnionFind components = new UnionFind(pixelCount);
 
             for (int y = 0; y < height; y++)
@@ -110,16 +121,13 @@ namespace ImageTemplate
                                                    (blue[currPixelIndex] == blue[nPixelIndex]);
 
                             if (isSameComponent)
-                                components.Union(currPixelIndex, nPixelIndex, 0);
+                                components.Union(currPixelIndex, nPixelIndex);
                         }
                     }
                 }
             }
 
-            for (int i = 0; i < pixelCount; i++)
-                segmentMap[i] = components.Find(i);
-
-            return segmentMap;
+            return components.FlattenParent();
         }
 
         private static List<Edge> ConstructEdges(RGBPixel[,] image, ColorChannel channel)
@@ -160,7 +168,7 @@ namespace ImageTemplate
 
                             if (currPixelIndex < nPixelIndex)
                             {
-                                Edge e = new Edge(currPixelIndex, nPixelIndex, Math.Abs(nIntensity - currIntensity));
+                                Edge e = new Edge(currPixelIndex, nPixelIndex, (byte) Math.Abs(nIntensity - currIntensity));
                                 edges.Add(e);
                             }
                         }
