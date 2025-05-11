@@ -23,14 +23,27 @@ namespace ImageTemplate
             }
         }
 
+        private static (int dx, int dy)[] _directions = {
+            (-1,  0), // Left
+            ( 1,  0), // Right
+            ( 0,  1), // Up
+            ( 0, -1), // Down
+            (-1,  1), // Top-Left
+            ( 1,  1), // Top-Right
+            (-1, -1), // Bottom-Left
+            ( 1, -1)  // Bottom-Right
+        };
+
         public static int[] Segment(RGBPixel[,] image, float k)
         {
             Task<int[]> redTask = Task.Run(() => SegmentChannel(image, ColorChannel.Red, k));
             Task<int[]> greenTask = Task.Run(() => SegmentChannel(image, ColorChannel.Green, k) );
             Task<int[]> blueTask = Task.Run(() => SegmentChannel(image, ColorChannel.Blue, k));
             Task.WaitAll(redTask, greenTask, blueTask);
-            
-            return MergeSegmentChannels(redTask.Result, greenTask.Result, blueTask.Result);
+
+            int width = ImageOperations.GetWidth(image);
+            int height = ImageOperations.GetHeight(image);
+            return MergeSegmentChannels(width, height, redTask.Result, greenTask.Result, blueTask.Result);
         }
 
         public static int[] SegmentChannel(RGBPixel[,] image, ColorChannel channel, float k)
@@ -69,45 +82,48 @@ namespace ImageTemplate
             return segmentMap;
         }
 
-        private static int[] MergeSegmentChannels(int[] red, int[] green, int[] blue)
+        private static int[] MergeSegmentChannels(int width, int height, int[] red, int[] green, int[] blue)
         {
-            Debug.Assert(red.Length == green.Length && green.Length == blue.Length);
+            Debug.Assert((red.Length == width * height) && (red.Length == green.Length) && (green.Length == blue.Length));
 
             int pixelCount = red.Length;
             int[] segmentMap = new int[pixelCount];
-            var uniqueSegments = new Dictionary<(int, int, int), int>();
-            int currentId = 0;
+            UnionFind components = new UnionFind(pixelCount);
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    int currPixelIndex = To1DIndex(x, y, width, height);
+
+                    foreach ((int dx, int dy) in _directions)
+                    {
+                        int nX = x + dx;
+                        int nY = y + dy;
+                        bool isOutOfBounds = (Math.Min(nX, nY) < 0) || (nX >= width) || (nY >= height);
+
+                        if (!isOutOfBounds)
+                        {
+                            int nPixelIndex = To1DIndex(nX, nY, width, height);
+                            bool isSameComponent = (red[currPixelIndex] == red[nPixelIndex])     &&
+                                                   (green[currPixelIndex] == green[nPixelIndex]) &&
+                                                   (blue[currPixelIndex] == blue[nPixelIndex]);
+
+                            if (isSameComponent)
+                                components.Union(currPixelIndex, nPixelIndex, 0);
+                        }
+                    }
+                }
+            }
 
             for (int i = 0; i < pixelCount; i++)
-            {
-                var key = (red[i], green[i], blue[i]);
-
-                if (!uniqueSegments.TryGetValue(key, out int id))
-                {
-                    id = currentId;
-                    uniqueSegments[key] = currentId;
-                    currentId++;
-                }
-
-                segmentMap[i] = id;
-            }
+                segmentMap[i] = components.Find(i);
 
             return segmentMap;
         }
 
         private static List<Edge> ConstructEdges(RGBPixel[,] image, ColorChannel channel)
         {
-            (int dx, int dy)[] directions = {
-                (-1,  0), // Left
-                ( 1,  0), // Right
-                ( 0,  1), // Up
-                ( 0, -1), // Down
-                (-1,  1), // Top-Left
-                ( 1,  1), // Top-Right
-                (-1, -1), // Bottom-Left
-                ( 1, -1)  // Bottom-Right
-            };
-
             int width = ImageOperations.GetWidth(image);
             int height = ImageOperations.GetHeight(image);
 
@@ -129,7 +145,7 @@ namespace ImageTemplate
                     int currPixelIndex = To1DIndex(image, x, y);
                     int currIntensity = GetChannelPixelIntensity(currPixel, channel);
 
-                    foreach ((int dx, int dy) in directions)
+                    foreach ((int dx, int dy) in _directions)
                     {
                         int nX = x + dx;
                         int nY = y + dy;
@@ -176,6 +192,13 @@ namespace ImageTemplate
 
             Debug.Assert(false, $"Uknown pixel channel ({channel}).");
             return -1;
+        }
+
+        private static int To1DIndex(int x, int y, int width, int height)
+        {
+            int index = y * width + x;
+            Debug.Assert((index >= 0) && (index < width * height));
+            return index;
         }
 
         private static int To1DIndex(RGBPixel[,] image, int x, int y)
