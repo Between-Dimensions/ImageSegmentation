@@ -53,6 +53,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.numericBlend = new System.Windows.Forms.NumericUpDown();
+            this.tboxElapsedTime = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaskSize)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -351,11 +353,34 @@
             0,
             0});
             // 
+            // tboxElapsedTime
+            // 
+            this.tboxElapsedTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tboxElapsedTime.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tboxElapsedTime.Location = new System.Drawing.Point(1216, 570);
+            this.tboxElapsedTime.Name = "tboxElapsedTime";
+            this.tboxElapsedTime.ReadOnly = true;
+            this.tboxElapsedTime.Size = new System.Drawing.Size(86, 23);
+            this.tboxElapsedTime.TabIndex = 56;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(1213, 596);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(89, 16);
+            this.label11.TabIndex = 57;
+            this.label11.Text = "Elapsed Time";
+            // 
             // MainApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1314, 681);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.tboxElapsedTime);
             this.Controls.Add(this.numericBlend);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label2);
@@ -422,5 +447,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown numericBlend;
+        private System.Windows.Forms.TextBox tboxElapsedTime;
+        private System.Windows.Forms.Label label11;
     }
 }
