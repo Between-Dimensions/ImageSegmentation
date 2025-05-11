@@ -254,6 +254,11 @@ namespace ImageTemplate
             RefreshRenderPanels();
         }
 
+        private void btnClearSegments_Click(object sender, EventArgs e)
+        {
+            _selectedSegments.Clear();
+        }
+
         private void pictureBox_MouseClick(object sender, MouseEventArgs e)
         {
             if (_imageSegments == null || _imageWidth == 0 || _imageHeight == 0) return;

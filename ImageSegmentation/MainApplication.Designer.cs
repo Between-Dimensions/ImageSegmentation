@@ -56,12 +56,15 @@
             this.tboxElapsedTime = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btnMergeRegions = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnClearSegments = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaskSize)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericBlend)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label9
@@ -247,14 +250,15 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.AutoScroll = true;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Location = new System.Drawing.Point(676, 39);
+            this.panel2.Location = new System.Drawing.Point(648, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(626, 525);
+            this.panel2.Size = new System.Drawing.Size(639, 513);
             this.panel2.TabIndex = 30;
             // 
             // pictureBox2
@@ -279,15 +283,16 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.AutoScrollMinSize = new System.Drawing.Size(1, 1);
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(12, 39);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(642, 525);
+            this.panel1.Size = new System.Drawing.Size(639, 513);
             this.panel1.TabIndex = 29;
             // 
             // cboxView1
@@ -382,19 +387,50 @@
             // 
             this.btnMergeRegions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMergeRegions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMergeRegions.Location = new System.Drawing.Point(973, 569);
+            this.btnMergeRegions.Location = new System.Drawing.Point(1048, 569);
             this.btnMergeRegions.Name = "btnMergeRegions";
-            this.btnMergeRegions.Size = new System.Drawing.Size(194, 23);
+            this.btnMergeRegions.Size = new System.Drawing.Size(119, 23);
             this.btnMergeRegions.TabIndex = 58;
             this.btnMergeRegions.Text = "Merge Segments";
             this.btnMergeRegions.UseVisualStyleBackColor = true;
             this.btnMergeRegions.Click += new System.EventHandler(this.btnMergeRegions_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 39);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1290, 519);
+            this.tableLayoutPanel1.TabIndex = 59;
+            // 
+            // btnClearSegments
+            // 
+            this.btnClearSegments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearSegments.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearSegments.Location = new System.Drawing.Point(953, 570);
+            this.btnClearSegments.Name = "btnClearSegments";
+            this.btnClearSegments.Size = new System.Drawing.Size(89, 23);
+            this.btnClearSegments.TabIndex = 60;
+            this.btnClearSegments.Text = "Clear";
+            this.btnClearSegments.UseVisualStyleBackColor = true;
+            this.btnClearSegments.Click += new System.EventHandler(this.btnClearSegments_Click);
             // 
             // MainApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1314, 681);
+            this.Controls.Add(this.btnClearSegments);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btnMergeRegions);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.tboxElapsedTime);
@@ -419,8 +455,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.btnOpen);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Name = "MainApplication";
             this.Text = "MainApplication";
             this.Load += new System.EventHandler(this.MainApplication_Load);
@@ -432,6 +466,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericBlend)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -467,5 +502,7 @@
         private System.Windows.Forms.TextBox tboxElapsedTime;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnMergeRegions;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnClearSegments;
     }
 }
