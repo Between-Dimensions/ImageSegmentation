@@ -25,9 +25,9 @@ namespace ImageTemplate
 
         public static int[] Segment(RGBPixel[,] image, float k)
         {
-            Task<int[]> redTask = Task <int[]>.Factory.StartNew(() => { return SegmentChannel(image, ColorChannel.Red, k); });
-            Task<int[]> greenTask = Task<int[]>.Factory.StartNew(() => { return SegmentChannel(image, ColorChannel.Green, k); });
-            Task<int[]> blueTask = Task<int[]>.Factory.StartNew(() => { return SegmentChannel(image, ColorChannel.Blue, k); });
+            Task<int[]> redTask = Task.Run(() => SegmentChannel(image, ColorChannel.Red, k));
+            Task<int[]> greenTask = Task.Run(() => SegmentChannel(image, ColorChannel.Green, k) );
+            Task<int[]> blueTask = Task.Run(() => SegmentChannel(image, ColorChannel.Blue, k));
             Task.WaitAll(redTask, greenTask, blueTask);
             
             return MergeSegmentChannels(redTask.Result, greenTask.Result, blueTask.Result);
