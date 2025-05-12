@@ -17,16 +17,16 @@ namespace ImageTemplate
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
         private struct Edge
         {
-            public byte weight;
-
             private int _v;
-            
+
             // Optimization:
             // Storing the direction (1 byte) of the W vertex only, essentially halving the size of the Edge struct.
             // This should help with avoiding GC and paging, since we are working on the 3 color channels at once.
             //
             // This possible because all edges like between 2 adj. verticies.
             private Direction _wVertexDirection;
+
+            public byte weight;
 
             public Edge(int v, Direction direction, byte weight)
             {
