@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace ImageTemplate
@@ -9,29 +10,50 @@ namespace ImageTemplate
 
     public static class PixelGraphSegmentator
     {
-        private class Edge
+        private enum Direction : byte { Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight }
+
+        // Avoid padding
+        // Size should be (6 bytes)
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
+        private struct Edge
         {
-            public int v;
-            public int w;
             public byte weight;
 
-            public Edge(int v, int w, byte weight)
+            private int _v;
+            
+            // Optimization:
+            // Storing the direction (1 byte) of the W vertex only, essentially halving the size of the Edge struct.
+            // This should help with avoiding GC and paging, since we are working on the 3 color channels at once.
+            //
+            // This possible because all edges like between 2 adj. verticies.
+            private Direction _wVertexDirection;
+
+            public Edge(int v, Direction direction, byte weight)
             {
-                this.v = v;
-                this.w = w;
+                _v = v;
+                _wVertexDirection = direction;
                 this.weight = weight;
+            }
+
+            public int V() => _v;
+
+            // Not the best API design, but it works
+            public int W(int width)
+            {
+                (int dx, int dy) = _directionsMap[_wVertexDirection];
+                return _v + (dy * width + dx);
             }
         }
 
-        private static (int dx, int dy)[] _directions = {
-            (-1,  0), // Left
-            ( 1,  0), // Right
-            ( 0,  1), // Up
-            ( 0, -1), // Down
-            (-1,  1), // Top-Left
-            ( 1,  1), // Top-Right
-            (-1, -1), // Bottom-Left
-            ( 1, -1)  // Bottom-Right
+        private static readonly Dictionary<Direction, (int dx, int dy)> _directionsMap = new Dictionary<Direction, (int dx, int dy)> {
+            { Direction.Left,        (-1,  0) },
+            { Direction.Right,       ( 1,  0) },
+            { Direction.Top,         ( 0,  1) },
+            { Direction.Bottom,      ( 0, -1) },
+            { Direction.TopLeft,     (-1,  1) },
+            { Direction.TopRight,    ( 1,  1) },
+            { Direction.BottomLeft,  (-1, -1) },
+            { Direction.BottomRight, ( 1, -1) },
         };
 
         public static int[] Segment(RGBPixel[,] image, int k)
@@ -50,6 +72,7 @@ namespace ImageTemplate
         {
             // Kruskal’s minimum spanning tree (MST) algorithm implementation using UnionFind
 
+            int imageWidth = ImageOperations.GetWidth(image);
             int pixelCount = GetPixelCount(image);
             int[] size = new int[pixelCount];
             // We only care abount the smallest connectivity edge weight and not the whole MST.
@@ -64,8 +87,8 @@ namespace ImageTemplate
 
             foreach (Edge e in edges)
             {
-                int c1 = components.Find(e.v);
-                int c2 = components.Find(e.w);
+                int c1 = components.Find(e.V());
+                int c2 = components.Find(e.W(imageWidth));
 
                 if (c1 != c2)
                 {
@@ -107,10 +130,10 @@ namespace ImageTemplate
                 {
                     int currPixelIndex = To1DIndex(x, y, width, height);
 
-                    foreach ((int dx, int dy) in _directions)
+                    foreach (var dirction in _directionsMap)
                     {
-                        int nX = x + dx;
-                        int nY = y + dy;
+                        int nX = x + dirction.Value.dx;
+                        int nY = y + dirction.Value.dy;
                         bool isOutOfBounds = (Math.Min(nX, nY) < 0) || (nX >= width) || (nY >= height);
 
                         if (!isOutOfBounds)
@@ -153,10 +176,10 @@ namespace ImageTemplate
                     int currPixelIndex = To1DIndex(image, x, y);
                     int currIntensity = GetChannelPixelIntensity(currPixel, channel);
 
-                    foreach ((int dx, int dy) in _directions)
+                    foreach (var direction in _directionsMap)
                     {
-                        int nX = x + dx;
-                        int nY = y + dy;
+                        int nX = x + direction.Value.dx;
+                        int nY = y + direction.Value.dy;
                         bool isOutOfBounds = (Math.Min(nX, nY) < 0) || (nX >= width) || (nY >= height);
 
                         // Can we do better? Can we create a branch-free loop?
@@ -168,7 +191,7 @@ namespace ImageTemplate
 
                             if (currPixelIndex < nPixelIndex)
                             {
-                                Edge e = new Edge(currPixelIndex, nPixelIndex, (byte) Math.Abs(nIntensity - currIntensity));
+                                Edge e = new Edge(currPixelIndex, direction.Key, (byte) Math.Abs(nIntensity - currIntensity));
                                 edges.Add(e);
                             }
                         }
