@@ -160,7 +160,7 @@ namespace ImageTemplate
 
             // Divide by 2 to avoid double edges
             // `a-b` and `b-a` are the same edge, we don't need to count it twice
-            int nEdges = (width * height * 8) / 2;
+            int nEdges = (((width - 1) * (height - 1) * 8) / 2) + ((width + height) * 2);
 
             // Optimization:
             // Preallocate the required space in advance to avoid unnecessary vector allocations and copying.
@@ -198,6 +198,13 @@ namespace ImageTemplate
                     }
                 }
             }
+
+            Debug.Assert(edges.Count <= nEdges, "Incorrect number of edges calculations!");
+            //unsafe
+            //{
+            //    Console.WriteLine($"Edge Size   : {sizeof(Edge)}B");
+            //    Console.WriteLine($"Wasted Space: {(nEdges - edges.Count) * sizeof(Edge) / 1024}KB"); 
+            //}
 
             return edges;
         }
