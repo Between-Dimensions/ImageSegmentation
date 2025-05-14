@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ImageTemplate
 {
-    public partial class MainApplication: Form
+    public partial class MainApplication : Form
     {
         private enum ViewMode
         {
@@ -83,7 +83,7 @@ namespace ImageTemplate
             tboxFilePath.Clear();
             tboxSize.Clear();
             tboxElapsedTime.Clear();
-            
+
             // Not a UI element, but needs be cleared with the UI
             _selectedSegments.Clear();
             _segmentColorMap.Clear();
@@ -190,15 +190,15 @@ namespace ImageTemplate
                             outImage[y, x].red = (byte)Lerp(a[y, x].red, b[y, x].red, alpha);
                             break;
                         case ColorChannel.Green:
-                            outImage[y, x].green = (byte) Lerp(a[y, x].green, b[y, x].green, alpha);
+                            outImage[y, x].green = (byte)Lerp(a[y, x].green, b[y, x].green, alpha);
                             break;
                         case ColorChannel.Blue:
                             outImage[y, x].blue = (byte)Lerp(a[y, x].blue, b[y, x].blue, alpha);
                             break;
                         case ColorChannel.All:
-                            outImage[y, x].red = (byte) Lerp(a[y, x].red, b[y, x].red, alpha);
-                            outImage[y, x].green = (byte) Lerp(a[y, x].green, b[y, x].green, alpha);
-                            outImage[y, x].blue = (byte) Lerp(a[y, x].blue, b[y, x].blue, alpha);
+                            outImage[y, x].red = (byte)Lerp(a[y, x].red, b[y, x].red, alpha);
+                            outImage[y, x].green = (byte)Lerp(a[y, x].green, b[y, x].green, alpha);
+                            outImage[y, x].blue = (byte)Lerp(a[y, x].blue, b[y, x].blue, alpha);
                             break;
                     }
                 }
@@ -257,6 +257,7 @@ namespace ImageTemplate
         private void btnClearSegments_Click(object sender, EventArgs e)
         {
             _selectedSegments.Clear();
+            RefreshRenderPanels();
         }
 
         private void pictureBox_MouseClick(object sender, MouseEventArgs e)
@@ -279,7 +280,7 @@ namespace ImageTemplate
         {
             if (_imageSegments == null) return null;
 
-            RGBPixel[,] displayImage = (RGBPixel[,]) image.Clone();
+            RGBPixel[,] displayImage = (RGBPixel[,])image.Clone();
             for (int y = 0; y < _imageHeight; y++)
             {
                 for (int x = 0; x < _imageWidth; x++)
