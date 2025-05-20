@@ -58,6 +58,7 @@
             this.btnMergeRegions = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnClearSegments = new System.Windows.Forms.Button();
+            this.saveBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaskSize)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -72,9 +73,10 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(673, 13);
+            this.label9.Location = new System.Drawing.Point(881, 16);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(38, 16);
+            this.label9.Size = new System.Drawing.Size(51, 21);
             this.label9.TabIndex = 50;
             this.label9.Text = "View";
             // 
@@ -83,9 +85,10 @@
             this.cboxView2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cboxView2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxView2.FormattingEnabled = true;
-            this.cboxView2.Location = new System.Drawing.Point(722, 12);
+            this.cboxView2.Location = new System.Drawing.Point(947, 15);
+            this.cboxView2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboxView2.Name = "cboxView2";
-            this.cboxView2.Size = new System.Drawing.Size(576, 21);
+            this.cboxView2.Size = new System.Drawing.Size(767, 24);
             this.cboxView2.TabIndex = 47;
             this.cboxView2.SelectionChangeCommitted += new System.EventHandler(this.selectedIndexChanged);
             // 
@@ -94,9 +97,10 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(12, 573);
+            this.label7.Location = new System.Drawing.Point(16, 705);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(130, 19);
+            this.label7.Size = new System.Drawing.Size(162, 24);
             this.label7.TabIndex = 45;
             this.label7.Text = "Original Image";
             // 
@@ -105,9 +109,10 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(970, 649);
+            this.label1.Location = new System.Drawing.Point(1285, 799);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 16);
+            this.label1.Size = new System.Drawing.Size(115, 21);
             this.label1.TabIndex = 43;
             this.label1.Text = "K Parameter";
             // 
@@ -115,9 +120,10 @@
             // 
             this.tboxK.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tboxK.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxK.Location = new System.Drawing.Point(1064, 646);
+            this.tboxK.Location = new System.Drawing.Point(1411, 795);
+            this.tboxK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tboxK.Name = "tboxK";
-            this.tboxK.Size = new System.Drawing.Size(148, 23);
+            this.tboxK.Size = new System.Drawing.Size(196, 27);
             this.tboxK.TabIndex = 44;
             this.tboxK.Text = "1";
             // 
@@ -125,9 +131,10 @@
             // 
             this.btnApply.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnApply.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnApply.Location = new System.Drawing.Point(676, 597);
+            this.btnApply.Location = new System.Drawing.Point(893, 735);
+            this.btnApply.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(98, 72);
+            this.btnApply.Size = new System.Drawing.Size(131, 89);
             this.btnApply.TabIndex = 34;
             this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
@@ -137,9 +144,10 @@
             // 
             this.btnOpen.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnOpen.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpen.Location = new System.Drawing.Point(549, 597);
+            this.btnOpen.Location = new System.Drawing.Point(724, 735);
+            this.btnOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(105, 72);
+            this.btnOpen.Size = new System.Drawing.Size(140, 89);
             this.btnOpen.TabIndex = 31;
             this.btnOpen.Text = "Open Image";
             this.btnOpen.UseVisualStyleBackColor = true;
@@ -150,9 +158,10 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(796, 610);
+            this.label3.Location = new System.Drawing.Point(1053, 751);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 16);
+            this.label3.Size = new System.Drawing.Size(94, 21);
             this.label3.TabIndex = 35;
             this.label3.Text = "Mask Size";
             // 
@@ -160,10 +169,11 @@
             // 
             this.tboxSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tboxSize.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxSize.Location = new System.Drawing.Point(95, 646);
+            this.tboxSize.Location = new System.Drawing.Point(127, 795);
+            this.tboxSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tboxSize.Name = "tboxSize";
             this.tboxSize.ReadOnly = true;
-            this.tboxSize.Size = new System.Drawing.Size(448, 23);
+            this.tboxSize.Size = new System.Drawing.Size(596, 27);
             this.tboxSize.TabIndex = 36;
             // 
             // label4
@@ -171,9 +181,10 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(796, 649);
+            this.label4.Location = new System.Drawing.Point(1053, 799);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 16);
+            this.label4.Size = new System.Drawing.Size(120, 21);
             this.label4.TabIndex = 37;
             this.label4.Text = "Gauss Sigma";
             // 
@@ -186,7 +197,8 @@
             0,
             0,
             0});
-            this.nudMaskSize.Location = new System.Drawing.Point(890, 608);
+            this.nudMaskSize.Location = new System.Drawing.Point(1179, 748);
+            this.nudMaskSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudMaskSize.Maximum = new decimal(new int[] {
             99,
             0,
@@ -198,7 +210,7 @@
             0,
             0});
             this.nudMaskSize.Name = "nudMaskSize";
-            this.nudMaskSize.Size = new System.Drawing.Size(57, 23);
+            this.nudMaskSize.Size = new System.Drawing.Size(76, 27);
             this.nudMaskSize.TabIndex = 38;
             this.nudMaskSize.Value = new decimal(new int[] {
             5,
@@ -210,10 +222,11 @@
             // 
             this.tboxFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tboxFilePath.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxFilePath.Location = new System.Drawing.Point(95, 608);
+            this.tboxFilePath.Location = new System.Drawing.Point(127, 748);
+            this.tboxFilePath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tboxFilePath.Name = "tboxFilePath";
             this.tboxFilePath.ReadOnly = true;
-            this.tboxFilePath.Size = new System.Drawing.Size(448, 23);
+            this.tboxFilePath.Size = new System.Drawing.Size(596, 27);
             this.tboxFilePath.TabIndex = 39;
             // 
             // label5
@@ -221,9 +234,10 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(12, 611);
+            this.label5.Location = new System.Drawing.Point(16, 752);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 16);
+            this.label5.Size = new System.Drawing.Size(94, 21);
             this.label5.TabIndex = 40;
             this.label5.Text = "File Name";
             // 
@@ -232,9 +246,10 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(12, 649);
+            this.label6.Location = new System.Drawing.Point(16, 799);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 16);
+            this.label6.Size = new System.Drawing.Size(105, 21);
             this.label6.TabIndex = 41;
             this.label6.Text = "Image Size";
             // 
@@ -242,9 +257,10 @@
             // 
             this.txtGaussSigma.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.txtGaussSigma.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGaussSigma.Location = new System.Drawing.Point(890, 646);
+            this.txtGaussSigma.Location = new System.Drawing.Point(1179, 795);
+            this.txtGaussSigma.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtGaussSigma.Name = "txtGaussSigma";
-            this.txtGaussSigma.Size = new System.Drawing.Size(57, 23);
+            this.txtGaussSigma.Size = new System.Drawing.Size(75, 27);
             this.txtGaussSigma.TabIndex = 42;
             this.txtGaussSigma.Text = "0.8";
             // 
@@ -256,14 +272,16 @@
             this.panel2.AutoScroll = true;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Location = new System.Drawing.Point(648, 3);
+            this.panel2.Location = new System.Drawing.Point(856, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(639, 513);
+            this.panel2.Size = new System.Drawing.Size(844, 631);
             this.panel2.TabIndex = 30;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox2.Location = new System.Drawing.Point(4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(617, 514);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -273,7 +291,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(631, 514);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -290,18 +309,20 @@
             this.panel1.AutoScrollMinSize = new System.Drawing.Size(1, 1);
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(639, 513);
+            this.panel1.Size = new System.Drawing.Size(844, 631);
             this.panel1.TabIndex = 29;
             // 
             // cboxView1
             // 
             this.cboxView1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxView1.FormattingEnabled = true;
-            this.cboxView1.Location = new System.Drawing.Point(56, 12);
+            this.cboxView1.Location = new System.Drawing.Point(75, 15);
+            this.cboxView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboxView1.Name = "cboxView1";
-            this.cboxView1.Size = new System.Drawing.Size(592, 21);
+            this.cboxView1.Size = new System.Drawing.Size(788, 24);
             this.cboxView1.TabIndex = 48;
             this.cboxView1.SelectionChangeCommitted += new System.EventHandler(this.selectedIndexChanged);
             // 
@@ -309,9 +330,10 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(9, 13);
+            this.label8.Location = new System.Drawing.Point(12, 16);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(38, 16);
+            this.label8.Size = new System.Drawing.Size(51, 21);
             this.label8.TabIndex = 49;
             this.label8.Text = "View";
             // 
@@ -319,9 +341,10 @@
             // 
             this.isGauss.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.isGauss.AutoSize = true;
-            this.isGauss.Location = new System.Drawing.Point(932, 578);
+            this.isGauss.Location = new System.Drawing.Point(1235, 711);
+            this.isGauss.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.isGauss.Name = "isGauss";
-            this.isGauss.Size = new System.Drawing.Size(15, 14);
+            this.isGauss.Size = new System.Drawing.Size(18, 17);
             this.isGauss.TabIndex = 51;
             this.isGauss.UseVisualStyleBackColor = true;
             this.isGauss.CheckedChanged += new System.EventHandler(this.isGauss_CheckedChanged);
@@ -331,9 +354,10 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(796, 576);
+            this.label2.Location = new System.Drawing.Point(1053, 709);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 16);
+            this.label2.Size = new System.Drawing.Size(134, 21);
             this.label2.TabIndex = 52;
             this.label2.Text = "Gauss Smooth";
             // 
@@ -342,9 +366,10 @@
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(970, 610);
+            this.label10.Location = new System.Drawing.Point(1285, 751);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 16);
+            this.label10.Size = new System.Drawing.Size(100, 21);
             this.label10.TabIndex = 54;
             this.label10.Text = "Blend (%)";
             // 
@@ -352,9 +377,10 @@
             // 
             this.numericBlend.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.numericBlend.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericBlend.Location = new System.Drawing.Point(1064, 609);
+            this.numericBlend.Location = new System.Drawing.Point(1411, 750);
+            this.numericBlend.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericBlend.Name = "numericBlend";
-            this.numericBlend.Size = new System.Drawing.Size(57, 23);
+            this.numericBlend.Size = new System.Drawing.Size(76, 27);
             this.numericBlend.TabIndex = 55;
             this.numericBlend.Value = new decimal(new int[] {
             50,
@@ -366,10 +392,11 @@
             // 
             this.tboxElapsedTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tboxElapsedTime.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxElapsedTime.Location = new System.Drawing.Point(1181, 570);
+            this.tboxElapsedTime.Location = new System.Drawing.Point(1559, 702);
+            this.tboxElapsedTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tboxElapsedTime.Name = "tboxElapsedTime";
             this.tboxElapsedTime.ReadOnly = true;
-            this.tboxElapsedTime.Size = new System.Drawing.Size(121, 23);
+            this.tboxElapsedTime.Size = new System.Drawing.Size(160, 27);
             this.tboxElapsedTime.TabIndex = 56;
             // 
             // label11
@@ -377,9 +404,10 @@
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(1178, 597);
+            this.label11.Location = new System.Drawing.Point(1555, 735);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(124, 16);
+            this.label11.Size = new System.Drawing.Size(169, 21);
             this.label11.TabIndex = 57;
             this.label11.Text = "Elapsed Time (MS)";
             // 
@@ -387,9 +415,10 @@
             // 
             this.btnMergeRegions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMergeRegions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMergeRegions.Location = new System.Drawing.Point(1048, 569);
+            this.btnMergeRegions.Location = new System.Drawing.Point(1381, 700);
+            this.btnMergeRegions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnMergeRegions.Name = "btnMergeRegions";
-            this.btnMergeRegions.Size = new System.Drawing.Size(119, 23);
+            this.btnMergeRegions.Size = new System.Drawing.Size(159, 28);
             this.btnMergeRegions.TabIndex = 58;
             this.btnMergeRegions.Text = "Merge Segments";
             this.btnMergeRegions.UseVisualStyleBackColor = true;
@@ -405,30 +434,45 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 39);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(16, 48);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1290, 519);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1704, 639);
             this.tableLayoutPanel1.TabIndex = 59;
             // 
             // btnClearSegments
             // 
             this.btnClearSegments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClearSegments.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearSegments.Location = new System.Drawing.Point(953, 570);
+            this.btnClearSegments.Location = new System.Drawing.Point(1255, 702);
+            this.btnClearSegments.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnClearSegments.Name = "btnClearSegments";
-            this.btnClearSegments.Size = new System.Drawing.Size(89, 23);
+            this.btnClearSegments.Size = new System.Drawing.Size(119, 28);
             this.btnClearSegments.TabIndex = 60;
             this.btnClearSegments.Text = "Clear";
             this.btnClearSegments.UseVisualStyleBackColor = true;
             this.btnClearSegments.Click += new System.EventHandler(this.btnClearSegments_Click);
             // 
+            // saveBtn
+            // 
+            this.saveBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.saveBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveBtn.Location = new System.Drawing.Point(1615, 794);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(126, 31);
+            this.saveBtn.TabIndex = 62;
+            this.saveBtn.Text = "Download";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+            // 
             // MainApplication
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1314, 681);
+            this.ClientSize = new System.Drawing.Size(1736, 838);
+            this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.btnClearSegments);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btnMergeRegions);
@@ -455,6 +499,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.btnOpen);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainApplication";
             this.Text = "MainApplication";
             this.Load += new System.EventHandler(this.MainApplication_Load);
@@ -504,5 +549,6 @@
         private System.Windows.Forms.Button btnMergeRegions;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnClearSegments;
+        private System.Windows.Forms.Button saveBtn;
     }
 }
