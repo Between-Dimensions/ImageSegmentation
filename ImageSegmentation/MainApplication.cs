@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace ImageTemplate
 {
@@ -309,6 +310,32 @@ namespace ImageTemplate
             }
 
             return displayImage;
+        }
+
+        private void saveBtn_Click(object sender, EventArgs e)
+        {
+            if(pictureBox1.Image == null || pictureBox2.Image == null)
+            {
+                MessageBox.Show("No image to Download");
+                return;
+            }
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "bmp files (*.bmp)|*.bmp|All files (*.*)|*.*";
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    pictureBox2.Image.Save(saveFileDialog1.FileName,ImageFormat.Bmp);
+                    MessageBox.Show("Image downloaded");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error couldn't download image: " + ex.Message);
+                }
+            }
+
         }
 
         private void RefreshRenderPanels()
